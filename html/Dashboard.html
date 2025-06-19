@@ -20,7 +20,14 @@
                         <i class="bi bi-search"></i>
                     </div>
                     <div class="navstatus">
-                        <a href="#productdetails"><i id="cart" class="bi bi-cart"></i></a>
+                        <a href="#">
+    
+      <i id="cart" class="bi bi-cart"></i>
+    <span id="cart-count">0</span>
+
+    
+</a>
+
                         <i id="profile" class="bi bi-person-fill"></i>
                     </div>
                 
@@ -56,7 +63,10 @@
                     </div>
 
                     <div class="product-details">
-                        <span class="wishlist-icon">♥</span>
+                       <span class="wishlist-icon" onclick="toggleCart(this)" style="cursor: pointer;">♥</span>
+
+                     
+
 
                             <h1 class="product-title">Wireless Headphones</h1>
                             <p class="product-description">
@@ -79,7 +89,9 @@
                                 </div>
 
                                     <div class="product-details">
-                                        <span class="wishlist-icon">♥</span>
+                                        <span class="wishlist-icon"></span>
+                                        <!-- Inside your product-details div -->
+                                        <span class="wishlist-icon" onclick="toggleCart(this)" style="cursor: pointer;">♥</span>
                                         <h1 class="product-title">Iphone 15 Pro Max</h1>
                                         <p class="product-description">
                                         Retina XDR display. 6.7‑inch (diagonal) all‑screen OLED display. 2796x1290-pixel resolution at 460 ppi. Dynamic Island. Always-On display.
@@ -100,7 +112,8 @@
 
                                     <div class="product-details">
 
-                                        <h1 class="product-title">Per<span class="wishlist-icon">♥</span>fumes</h1>
+                                        <h1 class="product-title">Per<span class="wishlist-icon"></span>fumes</h1>
+                                         <span class="wishlist-icon" onclick="toggleCart(this)" style="cursor: pointer;">♥</span>
                                         <p class="product-description">
                                             The fragrance includes top notes of green leaf and bergamot, middle notes of jasmine and gardenia, and base notes of ylang ylang, amber, and musk.
                                         <div class="product-price-rating">

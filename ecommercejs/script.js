@@ -16,9 +16,12 @@ function toggleCart(element) {
   } else {
     cartCount--;
     element.classList.remove("active");
-    element.style.color = "black"; // Optional: reset heart color when removed
+    // Optional: reset heart color when removed
+    element.style.color = "black"; 
   }
 
   cartCountElement.innerText = cartCount;
 }
+
+
 

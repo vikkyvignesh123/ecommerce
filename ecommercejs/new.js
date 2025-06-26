@@ -2,6 +2,7 @@ const highlight = document.getElementById("highlight");
 // const highlightId="#highlight";
 const productList = document.getElementById("productList");
 
+
 const categery = [
   {
     img: "elctronic.jpg",
@@ -164,6 +165,9 @@ productdetais.forEach((list) => {
 const indualDetail = document.getElementById("indualDetails");
 
 function productDescription(products) {
+  indualDetail.classList.remove("hidden");
+  indualDetail.classList.add("show");
+  
   let descriptionHTML = "";
   if (products.description) {
     descriptionHTML = `
@@ -177,9 +181,9 @@ function productDescription(products) {
     `;
   }
   // productList.style.display = "none";
-  productList.classList.add("hidden");
+  // productList.classList.add("hidden");
   // indualDetail.style.display = "block";
-  indualDetail.classList.remove("hidden");
+  // indualDetail.classList.remove("hidden");
   indualDetail.innerHTML = `
         <div class="alter">
             <img src="../img/${products.img}">
@@ -191,11 +195,17 @@ function productDescription(products) {
                 <button id="button2">BACK</button>
         </div>
         `;
+// Add SHOP NOW event listener after DOM is updated
+document.querySelector(".button1").addEventListener("click", () => {
+  buypage();
+});
+
   // Back Button Function
 
   indualDetail.scrollIntoView({ behavior: "smooth" });
   document.getElementById("button2").addEventListener("click", () => {
-    indualDetail.style.display = "none";
+    indualDetail.classList.remove("show");
+    indualDetail.classList.add("hidden");
     productList.style.display = "grid";
     productList.scrollIntoView({ behavior: "smooth" });
   });
@@ -250,3 +260,39 @@ buttons.forEach((button) => {
     display.textContent = count;
   });
 });
+
+
+//payment page
+const paymentPage = document.getElementById("paymentPage");
+
+
+
+function buypage()
+{
+  indualDetail.classList.add("hidden");
+  indualDetail.classList.remove("show");
+  paymentPage.classList.remove("hidden");
+  paymentPage.classList.add("show");
+  paymentPage.innerHTML=`
+    <div class="payment-container">
+    <h2>Payment Page</h2>
+    <p>Enter your payment details below:</p>
+    <form id="paymentForm">
+      <label>Name on Card: <input type="text" required></label><br><br>
+      <label>Card Number: <input type="text" required></label><br><br>
+      <label>Expiry Date: <input type="month" required></label><br><br>
+      <label>CVV: <input type="text" required></label><br><br>
+      <button type="submit">Pay Now</button>
+      <button type="button" id="backToDetails">Back</button>
+    </form>
+  </div>
+  `;
+  // Add SHOP NOW event listener after DOM is updated
+document.querySelector("#backToDetails").addEventListener("click", () => {
+  paymentPage.classList.add("hidden");
+  paymentPage.classList.remove("show");
+  indualDetail.classList.remove("hidden");
+  indualDetail.classList.add("show");
+});
+
+}

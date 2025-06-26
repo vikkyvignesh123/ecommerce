@@ -465,7 +465,28 @@ border-radius: 5px;
   margin-bottom: 10vh;
   color: #27ae60;
 }
-.hidden
+#indualDetails.hidden
 {
   display: none;
+}
+#indualDetails.show
+{
+  display: block;
+}
+
+#paymentPage
+{
+  height: 100vh;
+  width: 100vw;
+  background-color: blue;
+  display: none;
+}
+
+#paymentPage.hidden
+{
+  display: none;
+}
+#paymentPage.show
+{
+  display: block;
 }

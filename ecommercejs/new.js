@@ -281,13 +281,12 @@ function buypage()
       <label>Name on Card: <input type="text" required></label><br><br>
       <label>Card Number: <input type="text" required></label><br><br>
       <label>Expiry Date: <input type="month" required></label><br><br>
-      <label>CVV: <input type="text" required></label><br><br>
       <button type="submit">Pay Now</button>
       <button type="button" id="backToDetails">Back</button>
     </form>
   </div>
   `;
-  // Add SHOP NOW event listener after DOM is updated
+
 document.querySelector("#backToDetails").addEventListener("click", () => {
   paymentPage.classList.add("hidden");
   paymentPage.classList.remove("show");

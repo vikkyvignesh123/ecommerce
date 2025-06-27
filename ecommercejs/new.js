@@ -2,7 +2,6 @@ const highlight = document.getElementById("highlight");
 // const highlightId="#highlight";
 const productList = document.getElementById("productList");
 
-
 const categery = [
   {
     img: "elctronic.jpg",
@@ -167,7 +166,7 @@ const indualDetail = document.getElementById("indualDetails");
 function productDescription(products) {
   indualDetail.classList.remove("hidden");
   indualDetail.classList.add("show");
-  
+
   let descriptionHTML = "";
   if (products.description) {
     descriptionHTML = `
@@ -195,10 +194,10 @@ function productDescription(products) {
                 <button id="button2">BACK</button>
         </div>
         `;
-// Add SHOP NOW event listener after DOM is updated
-document.querySelector(".button1").addEventListener("click", () => {
-  buypage();
-});
+  // Add SHOP NOW event listener after DOM is updated
+  document.querySelector(".button1").addEventListener("click", () => {
+    buyPage();
+  });
 
   // Back Button Function
 
@@ -261,37 +260,35 @@ buttons.forEach((button) => {
   });
 });
 
-
 //payment page
 const paymentPage = document.getElementById("paymentPage");
 
-
-
-function buypage()
-{
-  indualDetail.classList.add("hidden");
-  indualDetail.classList.remove("show");
+function buyPage() {
   paymentPage.classList.remove("hidden");
   paymentPage.classList.add("show");
-  paymentPage.innerHTML=`
-    <div class="payment-container">
-    <h2>Payment Page</h2>
-    <p>Enter your payment details below:</p>
-    <form id="paymentForm">
-      <label>Name on Card: <input type="text" required></label><br><br>
-      <label>Card Number: <input type="text" required></label><br><br>
-      <label>Expiry Date: <input type="month" required></label><br><br>
-      <button type="submit">Pay Now</button>
-      <button type="button" id="backToDetails">Back</button>
-    </form>
+  paymentPage.innerHTML = `
+  
+  
+  <div class="popupBack">
+       <div class="payment-container">
+          <h2>Payment Page</h2>
+          <p>Enter your payment details below:</p>
+            <form id="paymentForm">
+              <label>Name on Card: <input type="text" required></label><br><br>
+              <label>Card Number: <input type="text" required></label><br><br>
+              <label>Expiry Date: <input type="month" required></label><br><br>
+              <button type="submit" id="paybutton">Pay Now</button>
+              <button type="button" id="backToDetails">Back</button>
+            </form>
+        </div>
+   
   </div>
   `;
 
-document.querySelector("#backToDetails").addEventListener("click", () => {
-  paymentPage.classList.add("hidden");
-  paymentPage.classList.remove("show");
-  indualDetail.classList.remove("hidden");
-  indualDetail.classList.add("show");
-});
-
+  document.querySelector("#backToDetails").addEventListener("click", () => {
+    paymentPage.classList.add("hidden");
+    paymentPage.classList.remove("show");
+    indualDetail.classList.remove("hidden");
+    indualDetail.classList.add("show");
+  });
 }

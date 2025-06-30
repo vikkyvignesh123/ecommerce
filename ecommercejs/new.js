@@ -144,7 +144,7 @@ productdetais.forEach((list) => {
   const allDetails = document.createElement("div");
   allDetails.innerHTML = `   
     <div class="cover">
-      <i class="toggleButton" style="cursor: pointer; font-size: 24px;" data-added="false">♥</i>
+      <i class="toggleButton" style="cursor: pointer; font-size: 24px;" data-added="false">🛒</i>
       <img src="../img/${list.img}" class="productdetailsimg">
       <h4>${list.productName}</h4>
       <h6>${list.productPrice}</h6>
@@ -291,4 +291,50 @@ function buyPage() {
     indualDetail.classList.remove("hidden");
     indualDetail.classList.add("show");
   });
+}
+
+const loginstatus = document.getElementById("loginstatus");
+const Regpopup = document.getElementById("Regpopup");
+
+loginstatus.addEventListener("click", () => {
+  Regpopup.classList.toggle("hidden");
+
+  const RegForm = `
+ <div class="RegForm">
+          <h2>Register</h2>
+        <form id="registerForm">
+          <button id="loginpagebutton">❌</button>
+          <input type="text" id="regUsername" placeholder="Username" required>
+          <input type="email" id="regemail" placeholder="Enter Email" required>
+          <input type="password" id="regPassword" placeholder="Password" required>
+          <button type="submit" id="registerbutton" onclick="register()">Register</button>
+        </form>
+        <a id="login">Login</a>
+  </div>
+  `;
+
+  Regpopup.innerHTML = RegForm;
+});
+
+function register() {
+  const regUserName = document.getElementById("regUsername").value;
+  const regEmail = document.getElementById("regemail").value;
+  const regPassword = document.getElementById("regPassword").value;
+
+  const registerdata = {
+    regname: regUserName,
+    regemail: regEmail,
+    regpassword: regPassword,
+  };
+
+  const regData = JSON.parse(localStorage.getItem("user")) || [];
+
+  const DataMatch = regData.some((data) => data.regemail === regEmail);
+  if (DataMatch) {
+    alert("already you are Registered");
+  } else {
+    regData.push(registerdata);
+    localStorage.setItem("user", JSON.stringify(regData));
+    alert("Register Successfully ✅");
+  }
 }

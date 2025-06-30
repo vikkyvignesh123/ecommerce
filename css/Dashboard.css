@@ -3,6 +3,7 @@
     padding: 0;
     margin: 0;
     scroll-behavior: smooth;
+    list-style: none;
         
   
     
@@ -431,7 +432,10 @@ border-radius: 5px;
   text-align: center;
 
 }
-#buttondetails:hover
+#buttondetails
+{
+  cursor: pointer;
+}
 
 #buttondetails.hide
 {
@@ -523,3 +527,96 @@ border-radius: 5px;
   height: 5vh;
   width: 10vw;
 }
+#Regpopup
+{
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+
+}
+
+
+
+  .popup {
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    width: 300px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    background: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    z-index: 1000;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .popup input {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+  }
+
+  .popup button {
+    width: 100%;
+    padding: 8px;
+    background: #2b80ff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+
+#loginpagebutton
+{
+  height: 3vh;
+  width: 3vw;
+  background:none;
+  margin-left: 90%;
+  margin-top:-5vh;
+}
+
+.RegForm
+{
+  justify-self: center;
+  background-color: white;
+  border-radius: 10px;
+  justify-items: center;
+  height: 50vh;
+  width: 45vw;
+  line-height: 55px;
+  text-align: center;
+}
+#regUsername
+{
+  height: 7vh;
+  width: 25vw;
+  background-color: #d8d2d2;
+  border-radius: 7px;
+}
+#regemail
+{
+  height: 7vh;
+  width: 25vw;
+  background-color: #d8d2d2;
+  border-radius: 7px;
+}
+#regPassword
+{
+  height: 7vh;
+  width: 25vw;
+  background-color: #d8d2d2;
+  border-radius: 7px;
+}
+#registerbutton
+{
+  height: 7vh;
+  width: 25vw;
+  border-radius: 5px;
+}
+

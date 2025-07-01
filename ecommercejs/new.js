@@ -293,27 +293,11 @@ function buyPage() {
   });
 }
 
-const loginstatus = document.getElementById("loginstatus");
-const Regpopup = document.getElementById("Regpopup");
+
 
 loginstatus.addEventListener("click", () => {
-  Regpopup.classList.toggle("hidden");
+  backGround.classList.toggle("show");
 
-  const RegForm = `
- <div class="RegForm">
-          <h2>Register</h2>
-        <form id="registerForm">
-          <button id="loginpagebutton">❌</button>
-          <input type="text" id="regUsername" placeholder="Username" required>
-          <input type="email" id="regemail" placeholder="Enter Email" required>
-          <input type="password" id="regPassword" placeholder="Password" required>
-          <button type="submit" id="registerbutton" onclick="register()">Register</button>
-        </form>
-        <a id="login">Login</a>
-  </div>
-  `;
-
-  Regpopup.innerHTML = RegForm;
 });
 
 function register() {
@@ -338,3 +322,29 @@ function register() {
     alert("Register Successfully ✅");
   }
 }
+
+
+const gotoRegister = document.getElementById("gotoRegister");
+const gotoLogin = document.getElementById("gotoLogin");
+const backGround = document.getElementById("background");
+const Regpopup = document.getElementById("Regpopup");
+
+
+//Register from login
+
+gotoRegister.addEventListener('click', (e) => {
+  e.preventDefault();
+  backGround.style.display = "none"; 
+  Regpopup.style.display = "block"; 
+});
+
+//Login from register
+gotoLogin.addEventListener('click', (e) => {
+  e.preventDefault();
+  Regpopup.style.display = "none";
+  backGround.style.display = "block";
+});
+
+
+
+

@@ -299,7 +299,9 @@ loginstatus.addEventListener("click", () => {
   backGround.classList.toggle("show");
 
 });
-
+/**
+ * 
+ */
 function register() {
   const regUserName = document.getElementById("regUsername").value;
   const regEmail = document.getElementById("regemail").value;

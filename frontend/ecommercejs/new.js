@@ -349,4 +349,34 @@ gotoLogin.addEventListener('click', (e) => {
 
 
 
+fetch('http://localhost:3000/api/sidebar')
+.then((response)=>response.json())
+.then((data)=>{
+  data.forEach((d)=>{
+    const list = document.getElementById(d.id);
+    if(list)
+    {
+      list.textContent=d.name;
+    }
+  })
+})
+.catch((err)=>
+{
+  console.log(err,"cant receive data");
+}
+)
+
+fetch('http://localhost:3000/api/logo')
+  .then((res) => res.json())
+
+  .then((data) => {
+    console.log(data);
+    const logoImg = document.getElementById('logoimg');
+    const logoName = document.getElementById('logoname');
+    logoImg.src = data.imageUrl;
+    logoName.textContent = data.title;
+  })
+  .catch((err) => {
+    console.log(err, 'cannot receive logo data');
+  });
 

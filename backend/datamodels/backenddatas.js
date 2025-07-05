@@ -1,6 +1,8 @@
 const contentType = {
     TEXTPLAIN:'text/plain',
-    APPJSON:'application/json'
+    APPJSON:'application/json',
+    PORT:3000
+
 }
 
 module.exports={

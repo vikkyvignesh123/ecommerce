@@ -1,25 +1,25 @@
 const express = require('express');
-const app = express()
-
+const app = express();
+const cors = require('cors');
+const bakeneddata =require('./datamodels/backenddatas')
+const router = require('./router');
+const path = require('path');
 app.use(express.json());
+app.use(cors());
+app.use('/api',router)
 
-app.use('/',(req,res,next)=>{
-    next()
-    // res.json({
-    //     success:true,
-    //     message:'hello world'
-    // })
-})
 
-app.post("/submit",(req,res)=>{
-    console.log(req.body);
-    res.json({
-        message:"post request sucesfull",
-    });
-});
+// Serve images from frontend/img folder
+app.use('/img', express.static(path.resolve(__dirname, '../frontend/img')));
 
 
 
-app.listen(3000,()=>{
-    console.log("server is running");
+
+
+
+
+const port = bakeneddata.contentType.PORT;
+app.listen(port,()=>
+{
+    console.log(`app server is running ${port}`);
 })

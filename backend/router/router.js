@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 
-const {navimgtext,navcontent,productlist} = require('./controller')
+const {navimgtext,navcontent,productlist} = require('../controller')
 
 router.get( '/imgtext', async(req,res)=>{
     try{

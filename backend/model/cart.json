@@ -1,0 +1,33 @@
+[
+  {
+    "cartId": "1",
+    "productId": "2",
+    "productname": "shoe",
+    "productprice": 3000,
+    "productImage": ""
+  },
+  {
+    "cartId": "Bfnf8ODWSCXRRFQPvYZ5F",
+    "productId": "15flWp_AtbST-i17BMkYL",
+    "productname": "phone",
+    "productprice": "PRICE RS.500/-"
+  },
+  {
+    "cartId": "KQgeOpbBo8LKbFyLs8kQf",
+    "productId": "mCoODIAZLSocE8D_Qpyql",
+    "productname": "laptop",
+    "productprice": "PRICE RS.300/-"
+  },
+  {
+    "cartId": "B9n3AU8_wWMAAiAvx27JS",
+    "productId": "Nn6afU8zxO9vKaLq4INcU",
+    "productname": "makeup",
+    "productprice": "PRICE RS.3300/-"
+  },
+  {
+    "cartId": "WuqQ8N9HmEmecA5tPOQ0W",
+    "productId": "L40ldNHqi-tHZQEJVLGKX",
+    "productname": "clothes",
+    "productprice": "PRICE RS.24300/-"
+  }
+]

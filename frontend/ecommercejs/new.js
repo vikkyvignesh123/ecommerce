@@ -18,26 +18,41 @@ const categery = [
 ];
 
     //productlist
-let count = 0;
-const display = document.getElementById("cart-count");
+let cart = [];
 
 fetch("http://localhost:3000/api/productlist")
   .then((res) => res.json())
   .then((data) => {
+    cart = data;
     const productList = document.getElementById("productList");
 
     data.forEach(d => {
       const allDetails = document.createElement("div");
+      allDetails.classList.add("cover");
+
       allDetails.innerHTML = `   
-        <div class="cover">
-          <i class="toggleButton" style="cursor: pointer; font-size: 24px;" data-added="false">🛒</i>
-          <img src="${d.img}" class="productdetailsimg">
-          <h4>${d.productName}</h4>
-          <h6>${d.productPrice}</h6>
-        </div>
+        <i class="toggleButton cartlogo" style="cursor: pointer; font-size: 24px;" data-added="false">🛒</i>
+        <img src="${d.img}" class="productdetailsimg">
+        <h4 class="productName">${d.productName}</h4>
+        <h6 class="productPrice">${d.productPrice}</h6>
       `;
 
+      // Append to container first
       productList.appendChild(allDetails);
+
+      // Now attach click event to the current cart icon inside this card
+      const cartIcon = allDetails.querySelector('.cartlogo');
+
+      cartIcon.addEventListener('click', () => {
+        const cartItem = {
+          img: d.img,
+          productName: d.productName,
+          productPrice: d.productPrice
+        };
+        addTocart(cartItem);
+      });
+    });
+  });
 
       // Add toggle listener AFTER appending
       const toggleButton = allDetails.querySelector(".toggleButton");
@@ -62,11 +77,8 @@ fetch("http://localhost:3000/api/productlist")
       images.addEventListener("click", () => {
         productDescription(d); 
       });
-    });
-  })
-  .catch((err) => {
-    console.error("Failed to fetch product list:", err);
-  });
+    
+
 
 function displayhigh(arrays) {
   arrays.forEach((images) => {
@@ -284,6 +296,24 @@ fetch('http://localhost:3000/api/imgtext')
     console.log(err, 'cannot receive logo data');
   });
 
+ 
+
+ function addTocart(cartItem) {
+  fetch('http://localhost:3000/api/cart', {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(cartItem)
+  })
+  .then(res => res.json())
+  .then(data => {
+    console.log("Added to cart:", data);
+  })
+  .catch(err => {
+    console.error("Error:", err);
+  });
+}
 
 
 

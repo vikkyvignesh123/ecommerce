@@ -1,0 +1,12 @@
+doctype html
+html
+  head
+    title Cart Page
+    link(rel="stylesheet", href="/css/cart.css")
+  body
+    h1 Your Cart
+    each item in cartItems
+      .item
+        img(src=item.productImage, width="100")
+        h2= item.productname
+        p ₹#{item.productprice}

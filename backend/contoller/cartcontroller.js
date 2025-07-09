@@ -10,7 +10,7 @@ const cartcontroller = {
       const result = await cartcontroller.cart({
         productImg,
         productPrice,
-        productName,
+        productName
       });
 
       if (!result.success) {
@@ -31,11 +31,11 @@ const cartcontroller = {
     }
   },
 
-  cart(cartdetails) {
+  async cart(cartdetails) {
     return new Promise((resolve, reject) => {
       try {
         const jsoncart = path.join(__dirname, "../model/cart.json");
-
+              let cartItems=[];
         if (!fs.existsSync(jsoncart)) {
           fs.writeFileSync(jsoncart, JSON.stringify([]));
         }
@@ -73,7 +73,7 @@ const cartcontroller = {
         reject(error);
       }
     });
-  },
+  }
 };
 
 module.exports = cartcontroller;

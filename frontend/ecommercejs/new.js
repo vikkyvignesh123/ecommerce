@@ -18,6 +18,7 @@ const categery = [
 ];
 
     //productlist
+
 let cart = [];
 
 fetch("http://localhost:3000/api/productlist")
@@ -37,12 +38,9 @@ fetch("http://localhost:3000/api/productlist")
         <h6 class="productPrice">${d.productPrice}</h6>
       `;
 
-      // Append to container first
       productList.appendChild(allDetails);
 
-      // Now attach click event to the current cart icon inside this card
       const cartIcon = allDetails.querySelector('.cartlogo');
-
       cartIcon.addEventListener('click', () => {
         const cartItem = {
           img: d.img,
@@ -53,7 +51,6 @@ fetch("http://localhost:3000/api/productlist")
       });
     });
   });
-
       // Add toggle listener AFTER appending
       const toggleButton = allDetails.querySelector(".toggleButton");
       toggleButton.addEventListener("click", () => {
@@ -296,26 +293,29 @@ fetch('http://localhost:3000/api/imgtext')
     console.log(err, 'cannot receive logo data');
   });
 
- 
+function addTocart(cartItem) {
+  const sendItem = {
+    productImg: cartItem.img,
+    productName: cartItem.productName,
+    productPrice: cartItem.productPrice
+  };
 
- function addTocart(cartItem) {
-  fetch('http://localhost:3000/api/cart', {
+  fetch('http://localhost:3000/api/postcart', {
     method: 'POST',
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify(cartItem)
+    body: JSON.stringify(sendItem)
   })
-  .then(res => res.json())
-  .then(data => {
-    console.log("Added to cart:", data);
-  })
-  .catch(err => {
-    console.error("Error:", err);
-  });
+    .then(res => {
+      if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+      return res.json();
+    })
+    .then(data => {
+      console.log("✅ Added to cart:", data);
+    })
+    .catch(err => {
+      console.error("❌ Error sending cart data:", err);
+    });
 }
-
-
-
-
 

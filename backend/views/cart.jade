@@ -1,12 +1,94 @@
 doctype html
 html
   head
-    title Cart Page
-    link(rel="stylesheet", href="/css/cart.css")
+    title website
+    link(rel="stylesheet", href="../css/Dashboard.css")
+    link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css")
+
   body
-    h1 Your Cart
-    each item in cartItems
-      .item
-        img(src=item.productImage, width="100")
-        h2= item.productname
-        p ₹#{item.productprice}
+    section#home
+      header
+        .logo#logosection
+          img#logoimg(src="", alt="Logo")
+          p#logoname
+
+        .search
+          input(type="text", placeholder="Search For product")
+          i.bi.bi-search
+            
+        .navstatus
+          a(href="/api/cart")
+            i#cart.bi.bi-cart
+            span#cart-count 0
+
+          button#burgerbutton =
+          #buttondetails
+            ul
+              li#loginstatus
+              li#homeid
+              li#profileid
+              li#aboutid
+
+      #highlight
+
+      main
+        .products
+          img(src="../img/airpods.jpg", alt="")
+          p AIRPODS
+          h2 Price : $300
+
+        .products
+          img(src="../img/pexels-elkady-6958875.jpg", alt="")
+          p PERFUME
+          h2 Price : $500
+
+        .products
+          img(src="../img/pexels-esmihel-18311089.jpg", alt="")
+          p LAPTOP
+          h2 Price : $700
+
+      #productList
+
+    // 📦 Optional Cart Items Section (only appears if cartItems passed)
+    if cartItems
+      section#cartSection
+        h1 Cart Page
+        if cartItems.length
+          each item in cartItems
+            .product
+              img(src=item.productImage, width="100")
+              h3= item.productname
+              p Price: ₹#{item.productprice}
+        else
+          p No items in the cart.
+
+    section#indualDetails
+    section#paymentPage
+
+    // REGISTER POPUP
+    #Regpopup.popup.hidden
+      .RegForm
+        h2 Register
+        form#registerForm
+          button#loginpagebutton(type="button") ❌
+          input#regUsername(type="text", placeholder="Username", required)
+          input#regemail(type="email", placeholder="Enter Email", required)
+          input#regPassword(type="password", placeholder="Password", required)
+          button#registerbutton(type="submit", onclick="register()") Register
+        a#gotoLogin(href="#") Login
+
+    // LOGIN POPUP
+    #background
+      #loginForm
+        h2 Login
+        input#loginEmail(type="email", placeholder="Enter Email", required)
+        br
+        input#loginPassword(type="password", placeholder="Enter Password", required)
+        br
+        button#loginSubmit Login
+        p
+          | Click To 
+          a#gotoRegister(href="#") Register
+
+    script(src="../ecommercejs/script.js")
+    script(src="../ecommercejs/new.js")

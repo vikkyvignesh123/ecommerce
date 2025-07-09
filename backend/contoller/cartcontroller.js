@@ -30,8 +30,24 @@ const cartcontroller = {
       });
     }
   },
+//cart display code
+getCartPage(req, res) {
+  const jsoncart = path.join(__dirname, "../model/cart.json");
 
-  async cart(cartdetails) {
+  if (!fs.existsSync(jsoncart)) {
+    return res.render("cart", { cartItems: [] });
+  }
+
+  const cartData = fs.readFileSync(jsoncart, "utf-8");
+  const cartItems = JSON.parse(cartData);
+
+  res.render("cart", { cartItems });
+},
+
+
+
+
+ async cart(cartdetails) {
     return new Promise((resolve, reject) => {
       try {
         const jsoncart = path.join(__dirname, "../model/cart.json");

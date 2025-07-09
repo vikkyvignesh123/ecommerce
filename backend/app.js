@@ -7,6 +7,7 @@ const router = require('./router/router');
 const path = require('path');
 app.use(express.json());
 app.use(cors());
+
 app.set("view engine","jade")
 app.set("views",path.join(__dirname,"views"))
 
@@ -14,15 +15,19 @@ app.use('/api', cartrouter);
 app.use('/api', router);
 
 
+app.use('/img', express.static(path.join(__dirname, '../frontend/img')));
+app.use('/css', express.static(path.join(__dirname, '../frontend/css')));
+app.use('/ecommercejs', express.static(path.join(__dirname, '../frontend/ecommercejs')));
 
 
-app.get("/jade",(req,res)=>{
-    res.render("index.jade",{
-        "title":"website",
-        "h1value":"index jade"
-    })
-})
 
+
+app.get("/jade", (req, res) => {
+  res.render("index", {
+    title: "website",
+    h1value: "index jade"
+  });
+});
 
 // Serve images from frontend/img folder
 app.use('/img', express.static(path.resolve(__dirname, '../frontend/img')));

@@ -8,4 +8,7 @@ cartrouter.post('/postcart', cartcontroller.postcart);
 // GET to display cart.jade
 cartrouter.get('/cart', cartcontroller.getCartPage);
 
+cartrouter.get('/dashboard', cartcontroller.getdashboardPage);
+
+
 module.exports = cartrouter;

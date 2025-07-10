@@ -1,0 +1,21 @@
+header
+    .logo#logosection
+        img#logoimg(src="",onclick ="window.location.href='/api/dashboard'", alt="Logo")
+        p#logoname
+
+    .search
+        input(type="text", placeholder="Search For product")
+        i.bi.bi-search
+        
+    .navstatus
+        a(href="/api/cart")
+            i#cart.bi.bi-cart
+            span#cart-count 0
+
+        button#burgerbutton =
+            #buttondetails
+                ul
+                    li#loginstatus
+                    li#homeid
+                    li#profileid
+                    li#aboutid

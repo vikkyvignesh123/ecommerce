@@ -1,0 +1,60 @@
+doctype html
+html
+  head
+    title website
+    link(rel="stylesheet", href="../css/Dashboard.css")
+    link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css")
+
+  body
+    section#home
+      include ./includes/navbar
+      #highlight
+
+      main
+        .products
+          img( src="../img/airpods.jpg", alt="")
+          p AIRPODS
+          h2 Price : $300
+
+        .products
+          img(src="../img/pexels-elkady-6958875.jpg", alt="")
+          p PERFUME
+          h2 Price : $500
+
+        .products
+          img(src="../img/pexels-esmihel-18311089.jpg", alt="")
+          p LAPTOP
+          h2 Price : $700
+
+      #productList
+
+    section#indualDetails
+    section#paymentPage
+
+    // REGISTER POPUP
+    #Regpopup.popup.hidden
+      .RegForm
+        h2 Register
+        form#registerForm
+          button#loginpagebutton(type="button") ❌
+          input#regUsername(type="text", placeholder="Username", required)
+          input#regemail(type="email", placeholder="Enter Email", required)
+          input#regPassword(type="password", placeholder="Password", required)
+          button#registerbutton(type="submit", onclick="register()") Register
+        a#gotoLogin(href="#") Login
+
+    // LOGIN POPUP
+    #background
+      #loginForm
+        h2 Login
+        input#loginEmail(type="email", placeholder="Enter Email", required)
+        br
+        input#loginPassword(type="password", placeholder="Enter Password", required)
+        br
+        button#loginSubmit Login
+        p
+          | Click To 
+          a#gotoRegister(href="#") Register
+
+    script(src="../ecommercejs/script.js")
+    script(src="../ecommercejs/new.js")

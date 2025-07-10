@@ -11,8 +11,8 @@ app.use(cors());
 app.set("view engine","jade")
 app.set("views",path.join(__dirname,"views"))
 
-app.use('/api', cartrouter);
-app.use('/api', router);
+app.use('/api/v1/cart', cartrouter);
+app.use('/api/v1/dashboard', router);
 
 
 app.use('/img', express.static(path.join(__dirname, '../frontend/img')));

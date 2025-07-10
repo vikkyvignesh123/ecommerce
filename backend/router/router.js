@@ -2,7 +2,6 @@ const express = require('express');
 //export router
 const router = express.Router();
 
-
 const {navimgtext,navcontent,productlist} = require('../controller')
 
 router.get( '/imgtext', async(req,res)=>{

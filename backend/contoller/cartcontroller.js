@@ -35,15 +35,26 @@ getCartPage(req, res) {
   const jsoncart = path.join(__dirname, "../model/cart.json");
 
   if (!fs.existsSync(jsoncart)) {
-    return res.render("cart", { cartItems: [] });
+    return res.render("cart.jade", { cartItems: [] });
   }
 
   const cartData = fs.readFileSync(jsoncart, "utf-8");
   const cartItems = JSON.parse(cartData);
 
-  res.render("cart", { cartItems });
+  res.render("cart.jade", { cartItems });
 },
 
+getdashboardPage(req, res) {
+  try{
+    res.render("dashboard.jade");
+  }
+  catch(err)
+  {
+    console.log(err);
+  }
+
+
+},
 
 
 

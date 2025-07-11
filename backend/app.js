@@ -5,6 +5,7 @@ const bakeneddata =require('./datamodels/backenddatas')
 const cartrouter = require('./router/cartrouter');
 const router = require('./router/router');
 const path = require('path');
+const fs =require('fs');
 app.use(express.json());
 app.use(cors());
 
@@ -15,19 +16,19 @@ app.use('/api/v1/cart', cartrouter);
 app.use('/api/v1/dashboard', router);
 
 
-app.use('/img', express.static(path.join(__dirname, '../frontend/img')));
-app.use('/css', express.static(path.join(__dirname, '../frontend/css')));
-app.use('/ecommercejs', express.static(path.join(__dirname, '../frontend/ecommercejs')));
+
+
+app.use("/static",express.static(path.join(__dirname,"public")));
+
+
+
+// app.use('/img', express.static(path.join(__dirname, '../frontend/img')));
+// app.use('/css', express.static(path.join(__dirname, '../frontend/css')));
+// app.use('/ecommercejs', express.static(path.join(__dirname, '../frontend/ecommercejs')));
 
 
 
 
-app.get("/jade", (req, res) => {
-  res.render("index", {
-    title: "website",
-    h1value: "index jade"
-  });
-});
 
 // Serve images from frontend/img folder
 app.use('/img', express.static(path.resolve(__dirname, '../frontend/img')));

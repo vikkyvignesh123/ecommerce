@@ -604,6 +604,12 @@ body {
   border-radius: 7px;
 }
 
+#logoimg
+{
+  height: 9vh;
+  width: 9vw;
+  border-radius: 50%;
+}
 
 
 #cartSection {

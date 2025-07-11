@@ -6,9 +6,11 @@ const cartcontroller = require('../contoller/cartcontroller');
 cartrouter.post('/postcart', cartcontroller.postcart);
 
 // GET to display cart.jade
-cartrouter.get('/cart', cartcontroller.getCartPage);
+cartrouter.get('/getcart', cartcontroller.getCartPage);
+cartrouter.delete('/deletecart/:id', cartcontroller.deleteCartitem);
+cartrouter.put('/alterproductname/:id/:name', cartcontroller.alterCartitem);
 
-cartrouter.get('/dashboard', cartcontroller.getdashboardPage);
+cartrouter.get('/getdashboard', cartcontroller.getdashboardPage);
 
 
 module.exports = cartrouter;

@@ -21,7 +21,7 @@ const categery = [
 
 let cart = [];
 
-fetch("http://localhost:3000/api/productlist")
+fetch("http://localhost:3000/api/v1/dashboard/productlist")
   .then((res) => res.json())
   .then((data) => {
     cart = data;
@@ -262,7 +262,7 @@ gotoLogin.addEventListener('click', (e) => {
 
 
 
-fetch('http://localhost:3000/api/navbarcontent')
+fetch('http://localhost:3000/api/v1/dashboard/navbarcontent')
 .then((response)=>response.json())
 .then((data)=>{
   data.forEach((d)=>{
@@ -279,7 +279,7 @@ fetch('http://localhost:3000/api/navbarcontent')
 }
 )
 
-fetch('http://localhost:3000/api/imgtext')
+fetch('http://localhost:3000/api/v1/dashboard/imgtext')
   .then((res) => res.json())
 
   .then((data) => {
@@ -300,7 +300,7 @@ function addTocart(cartItem) {
     productPrice: cartItem.productPrice
   };
 
-  fetch('http://localhost:3000/api/postcart', {
+  fetch('http://localhost:3000/api/v1/cart/postcart', {
     method: 'POST',
     headers: {
       "Content-Type": "application/json"

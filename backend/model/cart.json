@@ -7,45 +7,35 @@
     "productImage": ""
   },
   {
-    "cartId": "kMqnRGHnZ_OgbbLtWa49J",
-    "productId": "BKg2ZS7ifg6GLBBONRYna",
-    "productname": "laptop",
-    "productprice": "PRICE RS.300/-",
-    "productImage": "http://localhost:3000/img/laptop.jpg"
-  },
-  {
-    "cartId": "Bn3Q1HJN_e_fOSO3_KdZr",
-    "productId": "097PzCs4TEh6y8EKN-jti",
-    "productname": "makeup",
-    "productprice": "PRICE RS.3300/-",
-    "productImage": "http://localhost:3000/img/makeup.jpg"
-  },
-  {
     "cartId": "J4wtsOF6wcG2dQMLV0W7v",
     "productId": "FzTv4MVZ79tGW4X3hhuZQ",
     "productname": "tv",
     "productprice": "PRICE RS.3500/-",
-    "productImage": "http://localhost:3000/img/tv.jpg"
+    "productImage": "http://localhost:3000/static/img/tv.jpg"
   },
   {
     "cartId": "Y3QHtqdOCdCtuk79gUgRu",
     "productId": "JvzCVwSNkUhFrQdUcC_FD",
-    "productname": "clothes",
+    "productname": "dress",
     "productprice": "PRICE RS.24300/-",
-    "productImage": "http://localhost:3000/img/womendress.jpg"
+    "productImage": "http://localhost:3000/static/img/womendress.jpg"
   },
   {
     "cartId": "3jjxLfnkMRXoTeR3Fr0hQ",
     "productId": "zjpZRdbX2m6GlZWT-Se9w",
     "productname": "airpods",
     "productprice": "PRICE RS.300/-",
-    "productImage": "http://localhost:3000/img/airpods.jpg"
+    "productImage": "http://localhost:3000/static/img/airpods.jpg"
   },
   {
-    "cartId": "9KOUMNLeIv1C8HZ4kUoFO",
-    "productId": "4UZIRQ_a7TzxtBFFnyFF2",
-    "productname": "watch",
-    "productprice": "PRICE RS.1300/-",
-    "productImage": "http://localhost:3000/img/watchmodel.jpg"
+    "cartId": "f-JaNL3YS63D0WtD6ZjsQ",
+    "productId": "rTDWRYs6dlFldy70FKHlb"
+  },
+  {
+    "cartId": "AgLBqqGRIXn_HLCbMidml",
+    "productId": "9xJku6noU_C89fh10y7UG",
+    "productname": "phone",
+    "productprice": "PRICE RS.500/-",
+    "productImage": "http://localhost:3000/static/img/phone.jpg"
   }
 ]

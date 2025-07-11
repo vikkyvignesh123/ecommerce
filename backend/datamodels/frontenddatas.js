@@ -19,14 +19,14 @@ const sidebar = [
 ];
 const logo = {
     
-    imageUrl: "http://localhost:3000/img/elogo.jpg", 
+    imageUrl: "http://localhost:3000/static/img/elogo.jpg", 
     title: 'Buy Z0ne'
 };
 
 
 const productdetais = [
   {
-    img: "http://localhost:3000/img/airpods.jpg",
+    img: "http://localhost:3000/static/img/airpods.jpg",
     productName: "airpods",
     productPrice: "PRICE RS.300/-",
     description: {
@@ -37,7 +37,7 @@ const productdetais = [
     },
   },
   {
-    img: "http://localhost:3000/img/laptop.jpg",
+    img: "http://localhost:3000/static/img/laptop.jpg",
     productName: "laptop",
     productPrice: "PRICE RS.300/-",
     description: {
@@ -51,7 +51,7 @@ const productdetais = [
     },
   },
   {
-    img: "http://localhost:3000/img/phone.jpg",
+    img: "http://localhost:3000/static/img/phone.jpg",
     productName: "phone",
     productPrice: "PRICE RS.500/-",
     description: {
@@ -66,7 +66,7 @@ const productdetais = [
     },
   },
   {
-    img: "http://localhost:3000/img/shoe.jpg",
+    img: "http://localhost:3000/static/img/shoe.jpg",
     productName: "shoe",
     productPrice: "PRICE RS.700/-",
     description: {
@@ -77,7 +77,7 @@ const productdetais = [
     },
   },
   {
-    img: "http://localhost:3000/img/watchmodel.jpg",
+    img: "http://localhost:3000/static/img/watchmodel.jpg",
     productName: "watch",
     productPrice: "PRICE RS.1300/-",
     description: {
@@ -90,7 +90,7 @@ const productdetais = [
     },
   },
   {
-    img: "http://localhost:3000/img/makeup.jpg",
+    img: "http://localhost:3000/static/img/makeup.jpg",
     productName: "makeup",
     productPrice: "PRICE RS.3300/-",
     description: {
@@ -102,7 +102,7 @@ const productdetais = [
     },
   },
   {
-    img: "http://localhost:3000/img/tv.jpg",
+    img: "http://localhost:3000/static/img/tv.jpg",
     productName: "tv",
     productPrice: "PRICE RS.3500/-",
     description: {
@@ -114,7 +114,7 @@ const productdetais = [
     },
   },
   {
-    img: "http://localhost:3000/img/womendress.jpg",
+    img: "http://localhost:3000/static/img/womendress.jpg",
     productName: "clothes",
     productPrice: "PRICE RS.24300/-",
     description: {

@@ -74,7 +74,7 @@ const cartcontroller = {
 
 // Update product name using route params
 async alterCartitem(req, res) {
-  const { id, name } = req.params;
+  const { userid,productid,productprice } = req.params;
   const jsoncart = path.join(__dirname, "../model/cart.json");
 
   try {
@@ -88,13 +88,14 @@ async alterCartitem(req, res) {
     console.log("Searching for productId:", id);
     data.forEach(item => console.log("Found ID in file:", item.id));
 
-    const foundItem = data.find(item => item.productId === id);
+    const foundItem = data.find(item =>item.Userid===userid);
 
     if (!foundItem) {
+
       return res.status(404).json({ success: false, message: "Product not found in cart" });
     }
 
-    foundItem.productname = name;
+    foundItem.productDetails.productPrice = productprice;
 
     fs.writeFileSync(jsoncart, JSON.stringify(data, null, 2));
 

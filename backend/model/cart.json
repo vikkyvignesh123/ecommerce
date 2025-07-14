@@ -1,34 +1,28 @@
 [
   {
+    "userId": "1",
     "cartId": "1",
-    "productId": "2",
-    "productname": "shoe",
-    "productprice": 3000,
-    "productImage": ""
+    "productQuantity": 1,
+    "productDetails": [
+      {
+        "productId": "2",
+        "productname": "shoe",
+        "productprice": 3000,
+        "productImage": "http://localhost:3000/static/img/tv.jp"
+      }
+    ]
   },
   {
+    "userId": "J4wtsOF6wcG2dQMLV0W7v",
     "cartId": "J4wtsOF6wcG2dQMLV0W7v",
-    "productId": "FzTv4MVZ79tGW4X3hhuZQ",
-    "productname": "tv",
-    "productprice": "PRICE RS.3500/-",
-    "productImage": "http://localhost:3000/static/img/tv.jpg"
-  },
-  {
-    "cartId": "Y3QHtqdOCdCtuk79gUgRu",
-    "productId": "JvzCVwSNkUhFrQdUcC_FD",
-    "productname": "dress",
-    "productprice": "PRICE RS.24300/-",
-    "productImage": "http://localhost:3000/static/img/womendress.jpg"
-  },
-  {
-    "cartId": "f-JaNL3YS63D0WtD6ZjsQ",
-    "productId": "rTDWRYs6dlFldy70FKHlb"
-  },
-  {
-    "cartId": "AgLBqqGRIXn_HLCbMidml",
-    "productId": "9xJku6noU_C89fh10y7UG",
-    "productname": "mobilsphone",
-    "productprice": "PRICE RS.500/-",
-    "productImage": "http://localhost:3000/static/img/phone.jpg"
+    "productQuantity": 1,
+    "productDetails": [
+      {
+        "productId": "FzTv4MVZ79tGW4X3hhuZQ",
+        "productname": "tv",
+        "productprice": "PRICE RS.3500/-",
+        "productImage": "http://localhost:3000/static/img/tv.jpg"
+      }
+    ]
   }
 ]

@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
+const mongoose =require('mongoose');
 const bakeneddata =require('./datamodels/backenddatas')
 const cartrouter = require('./router/cartrouter');
 const router = require('./router/router');
@@ -11,7 +12,33 @@ app.use(cors());
 
 app.set("view engine","jade")
 app.set("views",path.join(__dirname,"views"))
+mongoose.connect('mongodb://localhost:27017/ecommerce')
+.then(()=>{
+console.log("mongodb connected");
+})
+.catch((err=>{
+    console.erroe("mongodb connection failed",err.message)
+}));
+const userSchema= new mongoose.Schema({
+  userId: Number,
+    cartId: Number,
+    productQuantity: Number,
+    productId: Number, 
+    productname: String,
+    productprice: Number,
+      
+})
+const user = mongoose.model('user',userSchema);
+user.find({
 
+})
+.then((users)=>{
+    console.log(users);
+    
+})
+.catch(err=>{
+    console.error("error on fetching user",err.message);
+})
 app.use('/api/v1/cart', cartrouter);
 app.use('/api/v1/dashboard', router);
 

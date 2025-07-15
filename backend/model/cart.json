@@ -1,6 +1,9 @@
 [
   {
     "userId": "1",
+    "username": "user1",
+    "useremail": "user1@example.com",
+    "userpassword": "pass1",
     "cartId": "1",
     "productQuantity": 1,
     "productDetails": [
@@ -14,7 +17,10 @@
   },
   {
     "userId": "J4wtsOF6wcG2dQMLV0W7v",
-    "cartId": "J4wtsOF6wcG2dQMLV0W7v",
+    "username": "user2",
+    "useremail": "user2@example.com",
+    "userpassword": "pass2",
+    "cartId": "J4wtsOF6wcG2dQMLV0W7vhh",
     "productQuantity": 1,
     "productDetails": [
       {
@@ -24,5 +30,31 @@
         "productImage": "http://localhost:3000/static/img/tv.jpg"
       }
     ]
+  },
+  {
+    "userId": "J4wtsOF6wcG2dQMLV0W7h",
+    "username": "user3",
+    "useremail": "user3@example.com",
+    "userpassword": "pass3",
+    "cartId": "J4wtsOF6wcG2dQMLV0W7vdg",
+    "productQuantity": 1,
+    "productDetails": [
+      {
+        "productId": "FzTv4MVZ79tGW4X3hhuZQ",
+        "productname": "tv",
+        "productprice": "5500",
+        "productImage": "http://localhost:3000/static/img/tv.jpg"
+      }
+    ]
+  },
+  {
+    "cartId": "7iJexMrebAKfbnyT4rd7l",
+    "productId": "X53ct9XfpP4G6fu1QxoMI",
+    "productname": "",
+    "productprice": "",
+    "productImage": "",
+    "username": "vignesh",
+    "useremail": "vignesh@example.com",
+    "userpassword": "12345"
   }
 ]

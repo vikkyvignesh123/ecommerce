@@ -1,21 +1,25 @@
 header
-    .logo#logosection
-        img#logoimg(src="/static/img/elogo.jpg",onclick ="window.location.href='/api/v1/cart/getdashboard'", alt="Logo")
-        p#logoname
+  .logo#logosection
+    img#logoimg(src="/static/img/elogo.jpg", onclick="window.location.href='/api/v1/cart/getdashboard'", alt="Logo")
+    p#logoname Ecommerce
 
-    .search
-        input(type="text", placeholder="Search For product")
-        i.bi.bi-search
-        
-    .navstatus
-        a(href="/api/v1/cart/getcart")
-            i#cart.bi.bi-cart
-            span#cart-count 0
+  .search
+    input(type="text", placeholder="Search For product")
+    i.bi.bi-search
 
-        button#burgerbutton =
-            #buttondetails
-                ul
-                    li#loginstatus
-                    li#homeid
-                    li#profileid
-                    li#aboutid
+  .navstatus
+    a(href="/api/v1/cart/getcart")
+      i#cart.bi.bi-cart
+      span#cart-count 0
+
+    button#burgerbutton Menu
+      #buttondetails
+        ul
+          li: a#loginstatus(href="#") Login
+          li: a#homeid(href="/api/v1/cart/getdashboard") Home
+          li: a#profileid(href="#") Profile
+          li: a#aboutid(href="#") About
+
+
+script(src="/static/ecommercejs/script.js")
+script(src="/static/ecommercejs/new.js")

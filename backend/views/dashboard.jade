@@ -1,60 +1,88 @@
 doctype html
 html
   head
-    title website
+    title Ecommerce Dashboard
     link(rel="stylesheet", href="/static/css/Dashboard.css")
     link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css")
-    
   body
     section#home
-      include ./includes/navbar
+      header
+        .logo#logosection
+          img#logoimg(src="/", alt="Logo")
+          p#logoname
+
+        .search
+          input(type="text", placeholder="Search For product")
+          i.bi.bi-search
+
+        .navstatus
+          a(href="#")
+            i#cart.bi.bi-cart
+            span#cart-count 0
+
+          .divWrapper(style="position: relative; display: inline-block;")
+            button#burgerbutton ☰ Menu
+            #buttondetails
+              ul
+                li
+                  a#loginstatus(href="#") Login
+                li
+                  a#homeid(href="/api/v1/cart/getdashboard") Home
+                li
+                  a#profileid(href="#") Profile
+                li
+                  a#aboutid(href="#") About
+
       #highlight
 
       main
         .products
-          img( src="/static/img/airpods.jpg", alt="")
+          img(src="/static/img/airpods.jpg", alt="Airpods")
           p AIRPODS
           h2 Price : $300
 
         .products
-          img(src="/static/img/pexels-elkady-6958875.jpg", alt="")
+          img(src="/static/img/pexels-elkady-6958875.jpg", alt="Perfume")
           p PERFUME
           h2 Price : $500
 
         .products
-          img(src="/static/img/pexels-esmihel-18311089.jpg", alt="")
+          img(src="/static/img/pexels-esmihel-18311089.jpg", alt="Laptop")
           p LAPTOP
           h2 Price : $700
 
       #productList
 
-    section#indualDetails
-    section#paymentPage
+    // Product Details Section (Single Product View)
+    section#indualDetails.hidden
+
+    // Payment Section
+    section#paymentPage.hidden
 
     // REGISTER POPUP
     #Regpopup.popup.hidden
       .RegForm
+        button#regclosebtn(style="position: absolute; top: 5px; right: 10px; cursor: pointer; background: none; border: none; font-size: 20px;") ❌
         h2 Register
         form#registerForm
-          button#loginpagebutton(type="button") ❌
-          input#regUsername(type="text", placeholder="Username", required)
-          input#regemail(type="email", placeholder="Enter Email", required)
-          input#regPassword(type="password", placeholder="Password", required)
-          button#registerbutton(type="submit", onclick="register()") Register
+          input#regUsername(type="text", name="username", placeholder="Username", required)
+          input#regemail(type="email", name="useremail", placeholder="Enter Email", required)
+          input#regPassword(type="password", name="userpassword", placeholder="Password", required)
+          button(type="submit") Register
         a#gotoLogin(href="#") Login
 
     // LOGIN POPUP
-    #background
-      #loginForm
+    #background.hidden
+      #loginForm(style="position: relative;")
+        button#loginclosebtn(style="position: absolute; top: 5px; right: 10px; cursor: pointer; background: none; border: none; font-size: 20px;") ❌
         h2 Login
-        input#loginEmail(type="email", placeholder="Enter Email", required)
-        br
-        input#loginPassword(type="password", placeholder="Enter Password", required)
-        br
-        button#loginSubmit Login
-        p
-          | Click To 
+        form#loginForm
+          input#loginEmail(type="email", name="useremail", placeholder="Enter Email", required)
+          br
+          input#loginPassword(type="password", name="userpassword", placeholder="Enter Password", required)
+          br
+          button(type="submit") Login
+        p Click To 
           a#gotoRegister(href="#") Register
 
-    script(src="/static/ecommercejs/script.js")
-    script(src="/static/ecommercejs/new.js")
+    script(src="/static/ecommercejs/dashboard.js")

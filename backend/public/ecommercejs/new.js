@@ -1,321 +1,204 @@
-const highlight = document.getElementById("highlight");
-// const highlightId="#highlight";
-const productList = document.getElementById("productList");
+window.addEventListener('DOMContentLoaded', () => {
+  const highlight = document.getElementById("highlight");
+  const productList = document.getElementById("productList");
 
-const categery = [
-  {
-    img: "elctronic.jpg",
-    text: "electronic",
-  },
-  {
-    img: "women.jpg",
-    text: "Womens",
-  },
-  {
-    img: "mens.jpg",
-    text: "Mens",
-  },
-];
+  const categery = [
+    { img: "elctronic.jpg", text: "electronic" },
+    { img: "women.jpg", text: "Womens" },
+    { img: "mens.jpg", text: "Mens" },
+  ];
 
-    //productlist
+  let cart = [];
+  let count = 0;
+  const display = document.getElementById("cart-count");
 
-let cart = [];
+  // Display category images
+  function displayhigh(arrays) {
+    arrays.forEach((images) => {
+      const categeryProduct = document.createElement("div");
+      categeryProduct.setAttribute("class", "boxsize");
 
-fetch("http://localhost:3000/api/v1/dashboard/productlist")
-  .then((res) => res.json())
-  .then((data) => {
-    cart = data;
-    const productList = document.getElementById("productList");
+      const categeryimage = document.createElement("img");
+      categeryimage.setAttribute("class", "elecimage");
+      categeryimage.src = `../img/${images.img}`;
 
-    data.forEach(d => {
-      const allDetails = document.createElement("div");
-      allDetails.classList.add("cover");
+      const categerytext = document.createElement("p");
+      categerytext.setAttribute("class", "text");
+      categerytext.textContent = images.text;
 
-      allDetails.innerHTML = `   
-        <i class="toggleButton cartlogo" style="cursor: pointer; font-size: 24px;" data-added="false">🛒</i>
-        <img src="${d.img}" class="productdetailsimg">
-        <h4 class="productName">${d.productName}</h4>
-        <h6 class="productPrice">${d.productPrice}</h6>
-      `;
-
-      productList.appendChild(allDetails);
-
-      const cartIcon = allDetails.querySelector('.cartlogo');
-      cartIcon.addEventListener('click', () => {
-        const cartItem = {
-          img: d.img,
-          productName: d.productName,
-          productPrice: d.productPrice
-        };
-        addTocart(cartItem);
-      });
+      categeryProduct.appendChild(categeryimage);
+      categeryProduct.appendChild(categerytext);
+      highlight.appendChild(categeryProduct);
     });
-  });
-      // Add toggle listener AFTER appending
-      const toggleButton = allDetails.querySelector(".toggleButton");
-      toggleButton.addEventListener("click", () => {
-        const isAdded = toggleButton.getAttribute("data-added") === "true";
-
-        if (!isAdded) {
-          count++;
-          toggleButton.setAttribute("data-added", "true");
-          toggleButton.style.color = "red";
-        } else {
-          count--;
-          toggleButton.setAttribute("data-added", "false");
-          toggleButton.style.color = "black";
-        }
-
-        display.textContent = count;
-      });
-
-      // ✅ product image click
-      const images = allDetails.querySelector(".productdetailsimg");
-      images.addEventListener("click", () => {
-        productDescription(d); 
-      });
-    
-
-
-function displayhigh(arrays) {
-  arrays.forEach((images) => {
-    const categeryProduct = document.createElement("div");
-    categeryProduct.setAttribute("class", "boxsize");
-    const categeryimage = document.createElement("img");
-    categeryimage.setAttribute("class", "elecimage");
-    const categerytext = document.createElement("p");
-    categerytext.setAttribute("class", "text");
-    categeryimage.src = `../img/${images.img}`;
-    categerytext.textContent = images.text;
-
-    categeryProduct.appendChild(categeryimage);
-    categeryProduct.appendChild(categerytext);
-    highlight.appendChild(categeryProduct);
-  });
-}
-
-displayhigh(categery);
-
-
-
-
-
-const indualDetail = document.getElementById("indualDetails");
-
-function productDescription(products) {
-  indualDetail.classList.remove("hidden");
-  indualDetail.classList.add("show");
-
-  let descriptionHTML = "";
-  if (products.description) {
-    descriptionHTML = `
-      <ul>
-        ${Object.entries(products.description)
-          .map(([key, value]) => {
-            return `<li><strong>${key}:</strong> ${value}</li>`;
-          })
-          .join("")}
-      </ul>
-    `;
   }
 
+  displayhigh(categery);
 
-  // productList.style.display = "none";
-  // productList.classList.add("hidden");
-  // indualDetail.style.display = "block";
-  // indualDetail.classList.remove("hidden");
-  indualDetail.innerHTML = `
-        <div class="alter">
-            <img src="${products.img}">
-            <p>${products.productName}</p>
-            <h3>${products.productPrice}</h3>
-            ${descriptionHTML}
-         
-                <button class="button1">SHOP NOW</button>
-                <button id="button2">BACK</button>
-        </div>
+  // Fetch product list
+  fetch("http://localhost:3000/api/v1/dashboard/productlist")
+    .then((res) => res.json())
+    .then((data) => {
+      cart = data;
+
+      data.forEach(d => {
+        const allDetails = document.createElement("div");
+        allDetails.classList.add("cover");
+
+        allDetails.innerHTML = `
+          <i class="toggleButton cartlogo" style="cursor: pointer; font-size: 24px;" data-added="false">🛒</i>
+          <img src="${d.img}" class="productdetailsimg">
+          <h4 class="productName">${d.productName}</h4>
+          <h6 class="productPrice">${d.productPrice}</h6>
         `;
-  // Add SHOP NOW event listener after DOM is updated
-  document.querySelector(".button1").addEventListener("click", () => {
-    buyPage();
-  });
 
-  // Back Button Function
+        productList.appendChild(allDetails);
 
-  indualDetail.scrollIntoView({ behavior: "smooth" });
-  document.getElementById("button2").addEventListener("click", () => {
-    indualDetail.classList.remove("show");
-    indualDetail.classList.add("hidden");
-    productList.style.display = "grid";
-    productList.scrollIntoView({ behavior: "smooth" });
-  });
-}
+        // Toggle cart icon
+        const toggleButton = allDetails.querySelector(".toggleButton");
+        toggleButton.addEventListener("click", () => {
+          const isAdded = toggleButton.getAttribute("data-added") === "true";
 
-// burger button functions
+          if (!isAdded) {
+            count++;
+            toggleButton.setAttribute("data-added", "true");
+            toggleButton.style.color = "red";
+          } else {
+            count--;
+            toggleButton.setAttribute("data-added", "false");
+            toggleButton.style.color = "black";
+          }
 
-const burgerbutton = document.getElementById("burgerbutton");
+          display.textContent = count;
 
-const buttondetails = document.getElementById("buttondetails");
+          // Add to cart on click
+          if (!isAdded) {
+            const cartItem = {
+              img: d.img,
+              productName: d.productName,
+              productPrice: d.productPrice
+            };
+            addTocart(cartItem);
+          }
+        });
 
-burgerbutton.addEventListener("mouseover", () => {
-  buttondetails.style.display = "block";
-});
+        // Product image click
+        const images = allDetails.querySelector(".productdetailsimg");
+        images.addEventListener("click", () => {
+          productDescription(d);
+        });
+      });
+    });
 
-burgerbutton.addEventListener("mouseout", () => {
-  buttondetails.style.display = "none";
-});
+  const indualDetail = document.getElementById("indualDetails");
 
-buttondetails.addEventListener("mouseover", () => {
-  buttondetails.style.display = "block";
-});
-
-buttondetails.addEventListener("mouseout", () => {
-  buttondetails.style.display = "none";
-});
-
-//payment page
-const paymentPage = document.getElementById("paymentPage");
-
-function buyPage() {
-  paymentPage.classList.remove("hidden");
-  paymentPage.classList.add("show");
-  paymentPage.innerHTML = `
-  
-  
-  <div class="popupBack">
-       <div class="payment-container">
-          <h2>Payment Page</h2>
-          <p>Enter your payment details below:</p>
-            <form id="paymentForm">
-              <label>Name on Card: <input type="text" required></label><br><br>
-              <label>Card Number: <input type="text" required></label><br><br>
-              <label>Expiry Date: <input type="month" required></label><br><br>
-              <button type="submit" id="paybutton">Pay Now</button>
-              <button type="button" id="backToDetails">Back</button>
-            </form>
-        </div>
-   
-  </div>
-  `;
-
-  document.querySelector("#backToDetails").addEventListener("click", () => {
-    paymentPage.classList.add("hidden");
-    paymentPage.classList.remove("show");
+  function productDescription(products) {
     indualDetail.classList.remove("hidden");
     indualDetail.classList.add("show");
-  });
-}
 
-
-
-loginstatus.addEventListener("click", () => {
-  backGround.classList.toggle("show");
-
-});
-/**
- * 
- */
-function register() {
-  const regUserName = document.getElementById("regUsername").value;
-  const regEmail = document.getElementById("regemail").value;
-  const regPassword = document.getElementById("regPassword").value;
-
-  const registerdata = {
-    regname: regUserName,
-    regemail: regEmail,
-    regpassword: regPassword,
-  };
-
-  const regData = JSON.parse(localStorage.getItem("user")) || [];
-
-  const DataMatch = regData.some((data) => data.regemail === regEmail);
-  if (DataMatch) {
-    alert("already you are Registered");
-  } else {
-    regData.push(registerdata);
-    localStorage.setItem("user", JSON.stringify(regData));
-    alert("Register Successfully ✅");
-  }
-}
-
-
-const gotoRegister = document.getElementById("gotoRegister");
-const gotoLogin = document.getElementById("gotoLogin");
-const backGround = document.getElementById("background");
-const Regpopup = document.getElementById("Regpopup");
-
-
-//Register from login
-
-gotoRegister.addEventListener('click', (e) => {
-  e.preventDefault();
-  backGround.style.display = "none"; 
-  Regpopup.style.display = "block"; 
-});
-
-//Login from register
-gotoLogin.addEventListener('click', (e) => {
-  e.preventDefault();
-  Regpopup.style.display = "none";
-  backGround.style.display = "block";
-});
-
-
-
-fetch('http://localhost:3000/api/v1/dashboard/navbarcontent')
-.then((response)=>response.json())
-.then((data)=>{
-  data.forEach((d)=>{
-    const list = document.getElementById(d.id);
-    if(list)
-    {
-      list.textContent=d.name;
+    let descriptionHTML = "";
+    if (products.description) {
+      descriptionHTML = `
+        <ul>
+          ${Object.entries(products.description)
+            .map(([key, value]) => `<li><strong>${key}:</strong> ${value}</li>`)
+            .join("")}
+        </ul>
+      `;
     }
-  })
-})
-.catch((err)=>
-{
-  console.log(err,"cant receive data");
-}
-)
 
-fetch('http://localhost:3000/api/v1/dashboard/imgtext')
-  .then((res) => res.json())
+    indualDetail.innerHTML = `
+      <div class="alter">
+        <img src="${products.img}">
+        <p>${products.productName}</p>
+        <h3>${products.productPrice}</h3>
+        ${descriptionHTML}
+        <button class="button1">SHOP NOW</button>
+        <button id="button2">BACK</button>
+      </div>
+    `;
 
-  .then((data) => {
-    console.log(data);
-    const logoImg = document.getElementById('logoimg');
-    const logoName = document.getElementById('logoname');
-    logoImg.src = data.imageUrl;
-    logoName.textContent = data.title;
-  })
-  .catch((err) => {
-    console.log(err, 'cannot receive logo data');
+    document.querySelector(".button1").addEventListener("click", () => {
+      buyPage();
+    });
+
+    document.getElementById("button2").addEventListener("click", () => {
+      indualDetail.classList.remove("show");
+      indualDetail.classList.add("hidden");
+      productList.style.display = "grid";
+      productList.scrollIntoView({ behavior: "smooth" });
+    });
+
+    indualDetail.scrollIntoView({ behavior: "smooth" });
+  }
+
+  function addTocart(cartItem) {
+    fetch('http://localhost:3000/api/v1/cart/postcart', {
+      method: 'POST',
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(cartItem)
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log("Added to cart", data);
+      })
+      .catch(err => {
+        console.error("Error:", err);
+      });
+  }
+
+  const paymentPage = document.getElementById("paymentPage");
+
+  function buyPage() {
+    paymentPage.classList.remove("hidden");
+    paymentPage.classList.add("show");
+
+    paymentPage.innerHTML = `
+      <div class="popupBack">
+        <div class="payment-container">
+          <h2>Payment Page</h2>
+          <form id="paymentForm">
+            <label>Name on Card: <input type="text" required></label><br><br>
+            <label>Card Number: <input type="text" required></label><br><br>
+            <label>Expiry Date: <input type="month" required></label><br><br>
+            <button type="submit" id="paybutton">Pay Now</button>
+            <button type="button" id="backToDetails">Back</button>
+          </form>
+        </div>
+      </div>
+    `;
+
+    document.getElementById("backToDetails").addEventListener("click", () => {
+      paymentPage.classList.add("hidden");
+      paymentPage.classList.remove("show");
+      indualDetail.classList.remove("hidden");
+      indualDetail.classList.add("show");
+    });
+  }
+
+  // Burger menu hover
+  const burgerButton = document.getElementById('burgerbutton');
+  const buttonDetails = document.getElementById('buttondetails');
+
+  function showMenu() {
+    buttonDetails.style.display = 'block';
+  }
+
+  function hideMenu() {
+    buttonDetails.style.display = 'none';
+  }
+
+  burgerButton.addEventListener('mouseover', showMenu);
+  burgerButton.addEventListener('mouseout', (e) => {
+    if (!buttonDetails.contains(e.relatedTarget)) {
+      hideMenu();
+    }
   });
 
-function addTocart(cartItem) {
-  const sendItem = {
-    productImg: cartItem.img,
-    productName: cartItem.productName,
-    productPrice: cartItem.productPrice
-  };
+  buttonDetails.addEventListener('mouseover', showMenu);
+  buttonDetails.addEventListener('mouseout', (e) => {
+    if (!burgerButton.contains(e.relatedTarget)) {
+      hideMenu();
+    }
+  });
 
-  fetch('http://localhost:3000/api/v1/cart/postcart', {
-    method: 'POST',
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(sendItem)
-  })
-    .then(res => {
-      if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
-      return res.json();
-    })
-    .then(data => {
-      console.log("✅ Added to cart:", data);
-    })
-    .catch(err => {
-      console.error("❌ Error sending cart data:", err);
-    });
-}
-
+});

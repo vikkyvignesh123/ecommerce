@@ -3,33 +3,53 @@ const fs = require("fs");
 const path = require("path");
 
 const cartcontroller = {
-  async postcart(req, res) {
-    const { productImg, productPrice, productName } = req.body;
+async postcart(req, res) {
+  const { username, useremail, userpassword } = req.body;
 
-    try {
-      const result = await cartcontroller.cart({
-        productImg,
-        productPrice,
-        productName
-      });
+  if (!username || !useremail || !userpassword) {
+    return res.status(400).json({
+      success: false,
+      message: "username, useremail, and userpassword are required"
+    });
+  }
 
-      if (!result.success) {
-        return res.status(result.status).json(result);
-      }
 
-      res.status(201).json({
-        success: true,
-        message: "Product added to cart",
-        data: result.data,
-      });
-    } catch (err) {
-      res.status(500).json({
-        success: false,
-        message: "Server error",
-        error: err.message,
-      });
+  const userid = nanoid();
+  const productid = nanoid();
+
+  const productImg = "";
+  const productPrice = "";
+  const productName = "";
+
+  try {
+    const result = await cartcontroller.cart({
+      userid,
+      productid,
+      username,
+      useremail,
+      userpassword,
+      productImg,
+      productPrice,
+      productName
+    });
+
+    if (!result.success) {
+      return res.status(result.status).json(result);
     }
-  },
+
+    res.status(201).json({
+      success: true,
+      message: "User cart created with empty product details",
+      data: result.data,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: "Server error",
+      error: err.message,
+    });
+  }
+},
 
   async deleteCartitem(req, res) {
   const productId = req.params.id;
@@ -74,7 +94,7 @@ const cartcontroller = {
 
 // Update product name using route params
 async alterCartitem(req, res) {
-  const { userid,productid,productprice } = req.params;
+  const { userid, productid, productprice } = req.params;
   const jsoncart = path.join(__dirname, "../model/cart.json");
 
   try {
@@ -84,22 +104,32 @@ async alterCartitem(req, res) {
 
     const data = JSON.parse(fs.readFileSync(jsoncart, "utf-8"));
 
-    // Debugging
-    console.log("Searching for productId:", id);
-    data.forEach(item => console.log("Found ID in file:", item.id));
+    console.log("Searching for productId:", productid);
 
-    const foundItem = data.find(item =>item.Userid===userid);
+    const foundItem = data.find(item => 
+      item.userId === userid
+    );
 
     if (!foundItem) {
-
-      return res.status(404).json({ success: false, message: "Product not found in cart" });
+      return res.status(404).json({ success: false, message: "User not found in cart" });
     }
 
-    foundItem.productDetails.productPrice = productprice;
+    let productFound = false;
+
+    foundItem.productDetails.forEach(product => {
+      if (product.productId === productid) {
+        product.productprice = productprice;   // Update price
+        productFound = true;
+      }
+    });
+      
+    if (!productFound) {
+      return res.status(404).json({ success: false, message: "Product not found in user's cart" });
+    }
 
     fs.writeFileSync(jsoncart, JSON.stringify(data, null, 2));
 
-    res.json({ success: true, message: "Product updated", data: foundItem });
+    res.json({ success: true, message: "Product price updated", data: foundItem });
 
   } catch (err) {
     res.status(500).json({
@@ -166,13 +196,17 @@ getdashboardPage(req, res) {
 
         const readcart = JSON.parse(fs.readFileSync(jsoncart, "utf-8"));
 
-        const productdata = {
-          cartId: nanoid(),
-          productId: nanoid(),
-          productname: cartdetails.productName,
-          productprice: cartdetails.productPrice,
-          productImage: cartdetails.productImg,
-        };
+       const productdata = {
+  cartId: nanoid(),
+  productId: nanoid(),
+  productname: cartdetails.productName || "",
+  productprice: cartdetails.productPrice || "",
+  productImage: cartdetails.productImg || "",
+  
+  username: cartdetails.username,
+  useremail: cartdetails.useremail,
+  userpassword: cartdetails.userpassword
+};
 
         const productExists = readcart.some(
           (item) => item.productname === productdata.productname

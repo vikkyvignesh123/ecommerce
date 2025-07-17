@@ -3,9 +3,9 @@ window.addEventListener('DOMContentLoaded', () => {
   const productList = document.getElementById("productList");
 
   const categery = [
-    { img: "elctronic.jpg", text: "electronic" },
-    { img: "women.jpg", text: "Womens" },
-    { img: "mens.jpg", text: "Mens" },
+    { img: "/static/img/elctronic.jpg", text: "electronic" },
+    { img: "/static/img/women.jpg", text: "Womens" },
+    { img: "/static/img/mens.jpg", text: "Mens" },
   ];
 
   let cart = [];
@@ -20,7 +20,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
       const categeryimage = document.createElement("img");
       categeryimage.setAttribute("class", "elecimage");
-      categeryimage.src = `../img/${images.img}`;
+      categeryimage.src = images.img;
 
       const categerytext = document.createElement("p");
       categerytext.setAttribute("class", "text");
@@ -202,3 +202,289 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 
 });
+
+
+
+//register and login popup
+const registerPopup = document.getElementById('Regpopup');
+const loginPopup = document.getElementById('background');
+
+const gotoLogin = document.getElementById('gotoLogin');
+const gotoRegister = document.getElementById('gotoRegister');
+
+const regCloseBtn = document.getElementById('regclosebtn');
+const loginCloseBtn = document.getElementById('loginclosebtn');
+
+// Menu -> Login Button Click → Open Register Form
+document.getElementById('loginstatus').addEventListener('click', (e) => {
+  e.preventDefault();
+  registerPopup.classList.remove('hidden');
+  registerPopup.classList.add('show');
+  loginPopup.classList.add('hidden');
+  loginPopup.classList.remove('show');
+});
+
+// Inside Register -> Login click
+gotoLogin.addEventListener('click', (e) => {
+  e.preventDefault();
+  registerPopup.classList.add('hidden');
+  registerPopup.classList.remove('show');
+  loginPopup.classList.remove('hidden');
+  loginPopup.classList.add('show');
+});
+
+// Inside Login -> Register click
+gotoRegister.addEventListener('click', (e) => {
+  e.preventDefault();
+  loginPopup.classList.add('hidden');
+  loginPopup.classList.remove('show');
+  registerPopup.classList.remove('hidden');
+  registerPopup.classList.add('show');
+});
+
+// Close buttons
+regCloseBtn.addEventListener('click', () => {
+  registerPopup.classList.add('hidden');
+  registerPopup.classList.remove('show');
+});
+
+loginCloseBtn.addEventListener('click', () => {
+  loginPopup.classList.add('hidden');
+  loginPopup.classList.remove('show');
+});
+
+
+
+// -------------------- Registration Popup --------------------
+document.getElementById('openRegPopupBtn').addEventListener('click', () => {
+  document.getElementById('Regpopup').classList.remove('hidden');
+  document.getElementById('Regpopup').classList.add('show');
+});
+
+document.getElementById('regclosebtn').addEventListener('click', () => {
+  document.getElementById('Regpopup').classList.remove('show');
+  document.getElementById('Regpopup').classList.add('hidden');
+});
+
+// Submit registration form
+document.getElementById('registerForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const username = document.getElementById('regUsername').value;
+  const email = document.getElementById('regemail').value;
+  const password = document.getElementById('regPassword').value;
+
+  try {
+    const response = await fetch('http://localhost:3000/api/v1/auth/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, email, password }),
+    });
+
+    const result = await response.json();
+
+    if (result.success) {
+      localStorage.setItem('username', result.username);
+      showAlert('Registration successful! 🎉', '#4caf50');
+
+      document.getElementById('logoname').textContent = `Welcome, ${result.username}`;
+      document.getElementById('loginstatus').textContent = 'Logout';
+
+      setTimeout(() => {
+        window.location.href = '/webpage';
+      }, 2000);
+    } else {
+      alert(result.message);
+    }
+  } catch (err) {
+    console.error(err);
+    alert('Registration failed. Try again.');
+  }
+});
+
+// -------------------- Login Popup --------------------
+document.getElementById('loginclosebtn').addEventListener('click', () => {
+  document.getElementById('background').classList.remove('show');
+  document.getElementById('background').classList.add('hidden');
+});
+
+// Submit login form
+document.getElementById('loginForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const email = document.getElementById('loginEmail').value;
+  const password = document.getElementById('loginPassword').value;
+
+  try {
+    const response = await fetch('/api/v1/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password }),
+    });
+
+    const result = await response.json();
+
+    if (result.success) {
+      localStorage.setItem('username', result.username);
+      showAlert('Login successful! 👋', '#4caf50');
+
+      document.getElementById('logoname').textContent = `Welcome, ${result.username}`;
+      document.getElementById('loginstatus').textContent = 'Logout';
+
+      setTimeout(() => {
+        window.location.href = '/webpage';
+      }, 2000);
+    } else {
+      alert(result.message);
+    }
+  } catch (err) {
+    console.error(err);
+    alert('Login error. Please try again.');
+  }
+});
+
+// -------------------- Login/Logout Toggle --------------------
+// Open Register Popup on Menu Login Click
+document.getElementById('loginstatus').addEventListener('click', () => {
+  const username = localStorage.getItem('username');
+
+  if (username) {
+    // Logout logic
+    localStorage.removeItem('username');
+    document.getElementById('logoname').textContent = 'Welcome, Guest';
+    document.getElementById('loginstatus').textContent = 'Login';
+    showAlert('Logged out successfully 👋', '#f44336');
+  } else {
+    // Login logic: Show Register form by default
+    document.getElementById('Regpopup').classList.remove('hidden');
+    document.getElementById('background').classList.add('hidden');
+  }
+});
+
+
+// Switch to Login
+document.getElementById('gotoLogin').addEventListener('click', (e) => {
+  e.preventDefault();
+  document.getElementById('Regpopup').classList.add('hidden');
+  document.getElementById('background').classList.remove('hidden');
+});
+
+// Switch to Register
+document.getElementById('gotoRegister').addEventListener('click', (e) => {
+  e.preventDefault();
+  document.getElementById('background').classList.add('hidden');
+  document.getElementById('Regpopup').classList.remove('hidden');
+});
+
+// Close Popups
+document.getElementById('regclosebtn').addEventListener('click', () => {
+  document.getElementById('Regpopup').classList.add('hidden');
+});
+
+document.getElementById('loginclosebtn').addEventListener('click', () => {
+  document.getElementById('background').classList.add('hidden');
+});
+
+// -------------------- Initialize on Page Load --------------------
+window.addEventListener('DOMContentLoaded', () => {
+  const username = localStorage.getItem('username');
+
+  if (username) {
+    document.getElementById('logoname').textContent = `Welcome, ${username}`;
+    document.getElementById('loginstatus').textContent = 'Logout';
+  } else {
+    document.getElementById('logoname').textContent = 'Welcome, Guest';
+    document.getElementById('loginstatus').textContent = 'Login';
+  }
+});
+
+// -------------------- Alert Utility --------------------
+function showAlert(message, color) {
+  const alertBox = document.createElement('div');
+  alertBox.textContent = message;
+  alertBox.style.position = 'fixed';
+  alertBox.style.top = '20px';
+  alertBox.style.right = '20px';
+  alertBox.style.background = color;
+  alertBox.style.color = 'white';
+  alertBox.style.padding = '10px 20px';
+  alertBox.style.borderRadius = '5px';
+  alertBox.style.boxShadow = '0 0 10px rgba(0,0,0,0.2)';
+  alertBox.style.zIndex = 9999;
+  document.body.appendChild(alertBox);
+
+  setTimeout(() => alertBox.remove(), 3000);
+}
+
+
+// // register submit
+// document.getElementById('registerForm').addEventListener('submit', async (e) => {
+//   e.preventDefault();
+
+//   const username = document.getElementById('regUsername').value;
+//   const email = document.getElementById('regemail').value;
+//   const password = document.getElementById('regPassword').value;
+
+//   try {
+//     const res = await fetch('/register', {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json'
+//       },
+//       body: JSON.stringify({ username, email, password })
+//     });
+
+//     const data = await res.json();
+
+//     if (res.ok) {
+//       alert('Registration Successful ✅');
+//       document.getElementById('Regpopup').classList.add('hidden');
+//       document.getElementById('Regpopup').classList.remove('show');
+//     } else {
+//       alert(data.message || 'Registration Failed ❌');
+//     }
+
+//   } catch (err) {
+//     console.error(err);
+//     alert('Server Error ❌');
+//   }
+// });
+
+
+
+
+
+//login form submit
+document.getElementById('loginForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const email = document.getElementById('loginEmail').value;
+  const password = document.getElementById('loginPassword').value;
+
+  try {
+    const res = await fetch('/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email, password })
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      alert('Login Successful ✅');
+      document.getElementById('background').classList.add('hidden');
+      document.getElementById('background').classList.remove('show');
+    } else {
+      alert(data.message || 'Login Failed ❌');
+    }
+
+  } catch (err) {
+    console.error(err);
+    alert('Server Error ❌');
+  }
+});
+
+
+

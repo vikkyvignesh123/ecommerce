@@ -7,9 +7,11 @@ const router = require('./router/router');
 const path = require('path');
 const fs =require('fs');
 const app = express();
+const authrouter = require('../backend/router/authendicate');
+const userRouter = require('./router/userrouter');
 
 app.use(express.json()); // ✅ To parse JSON input
-
+app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 app.set("view engine","jade")
@@ -28,6 +30,9 @@ app.get('/webpage',(req,res)=>{
 app.use('/api/v1/cart', cartrouter);
 app.use('/api/v1/dashboard', router);
 
+app.use('/api/v1/auth', authrouter);
+
+app.use('/api/v1/user',userRouter);
 
 
 

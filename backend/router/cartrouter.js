@@ -15,9 +15,7 @@ cartrouter.put('/alterproductname/:userid/:productid/:productprice', cartcontrol
 
 cartrouter.post('/addproduct/:userid', cartcontroller.addProduct);
 
-cartrouter.post('/register', cartcontroller.register);
 
-cartrouter.post('/login', cartcontroller.login);
 
 
 

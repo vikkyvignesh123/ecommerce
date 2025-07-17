@@ -212,68 +212,11 @@ async function addProduct(req, res) {
   }
 }
 
-//REGISTER FORM
-
-async function register(req, res) {
-  const { username, useremail, userpassword } = req.body;
-
-  if (!username || !useremail || !userpassword) {
-    return res.status(400).json({ success: false, message: "All fields are required" });
-  }
-
-  try {
-    // Check if user already exists
-    const existingUser = await UserCart.findOne({ useremail });
-
-    if (existingUser) {
-      return res.status(400).json({ success: false, message: "User already exists" });
-    }
-
-    // Create new user with empty cart
-    const newUser = new UserCart({
-      userId: nanoid(),
-      username,
-      useremail,
-      userpassword,
-      cartId: nanoid(),
-      productQuantity: 0,
-      productDetails: []
-    });
-
-    await newUser.save();
-
-    res.json({ success: true, message: "Registered successfully" });
-
-  } catch (err) {
-    res.status(500).json({ success: false, message: "Register failed", error: err.message });
-  }
-}
-
-//LOGIN FORM 
-
-async function login(req, res) {
-  const { useremail, userpassword } = req.body;
-
-  try {
-    const user = await UserCart.findOne({ useremail, userpassword });
-
-    if (!user) {
-      return res.status(401).json({ success: false, message: "Invalid email or password" });
-    }
-
-    res.json({ success: true, message: "Login successful", data: user });
-
-  } catch (err) {
-    res.status(500).json({ success: false, message: "Login failed", error: err.message });
-  }
-}
-
 module.exports = {
   postcart,
   getCartPage,
   deleteCartitem,
   alterCartitem,
   addProduct,
-  register,
-  login
+
 };

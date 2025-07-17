@@ -1,20 +1,13 @@
 const mongoose = require('mongoose');
 
-const productDetailSchema = new mongoose.Schema({
-  productId: String,
-  productname: String,
-  productprice: String,
-  productImage: String
-});
+
 
 const userSchema = new mongoose.Schema({
-  userId: String,               
-  username: String,
-  useremail: String,
-  userpassword: String,
+  userId: {type:mongoose.Schema.ObjectId,ref:"User"},               
   cartId: String,            
+  productid: {type:mongoose.Schema.ObjectId,ref:"Product"},
   productQuantity: Number,
-  productDetails: [productDetailSchema]  // product details array
+
 });
 
 const UserCart = mongoose.model('UserCart', userSchema);

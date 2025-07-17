@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const productDetailSchema = new mongoose.Schema({
   productId: String,
-  productname: String,
+  productname: {type:String,unique:true},
   productprice: String,
   productImage: String,
   createdat:{type:Date,default:Date.now()}
@@ -10,6 +10,6 @@ const productDetailSchema = new mongoose.Schema({
 
 
 
-const productdetails = mongoose.model('UserCart', productDetailSchema);
+const productdetails = mongoose.model('productCart', productDetailSchema);
 
-module.exports = productdetail;
+module.exports = productdetails;

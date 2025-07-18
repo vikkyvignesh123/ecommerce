@@ -11,6 +11,7 @@ const authrouter = require('../backend/router/authendicate');
 const userRouter = require('./router/userrouter');
 const productRouter = require('./router/product');
 
+
 app.use(express.json()); // ✅ To parse JSON input
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());

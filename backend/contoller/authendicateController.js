@@ -48,7 +48,14 @@ const login = async (req, res) => {
     }
 
     // Send success response
-    res.status(200).json({ success: true, message: 'Login successful', username: user.username });
+    res.status(200).json({
+  success: true,
+  message: 'Login successful',
+  username: user.username,
+  email: user.email,
+  userId: user._id  // optional for more secure id linking
+});
+
   } catch (err) {
     console.error(err);
     res.status(500).json({ success: false, message: 'Server error during login' });

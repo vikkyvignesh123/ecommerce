@@ -3,17 +3,17 @@ const cartrouter = express.Router();
 const cartcontroller = require('../contoller/cartcontroller2');
 // const allcartmiddleware = require('../middleware/allcart');
 // POST to add item to cart
-cartrouter.post('/createuser', cartcontroller.postcart);
-
+cartrouter.post('/addcart', cartcontroller.postcart);
+cartrouter.post('/updatecart', cartcontroller.postcart);
 // GET to display cart.jade
-cartrouter.get('/getallcart', cartcontroller.getCartPage);
+cartrouter.get('/getmycart', cartcontroller.getCartPage);
 
 
-cartrouter.delete('/deletecart/:id', cartcontroller.deleteCartitem);
+// cartrouter.delete('/deletecart/:id', cartcontroller.deleteCartitem);
 
-cartrouter.put('/alterproductname/:userid/:productid/:productprice', cartcontroller.alterCartitem);
+// cartrouter.put('/alterproductname/:userid/:productid/:productprice', cartcontroller.alterCartitem);
 
-cartrouter.post('/addproduct/:userid', cartcontroller.addProduct);
+// cartrouter.post('/addproduct/:userid', cartcontroller.addProduct);
 
 
 

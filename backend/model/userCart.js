@@ -1,15 +1,10 @@
 const mongoose = require('mongoose');
 
-
-
-const userSchema = new mongoose.Schema({
-  userId: {type:mongoose.Schema.ObjectId,ref:"User"},               
-  cartId: String,            
-  productid: {type:mongoose.Schema.ObjectId,ref:"Product"},
-  productQuantity: Number,
-
+const userCartSchema = new mongoose.Schema({
+    userId: { type: mongoose.Schema.ObjectId, ref: "User" },
+    cartId: String,
+    productId: { type: mongoose.Schema.ObjectId, ref: "Product" }, // ✅ Use camelCase exactly!
+    productQuantity: { type: Number, default: 1 }
 });
 
-const UserCart = mongoose.model('UserCart', userSchema);
-
-module.exports = UserCart;
+module.exports = mongoose.model("UserCart", userCartSchema);

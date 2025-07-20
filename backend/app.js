@@ -10,6 +10,7 @@ const app = express();
 const authrouter = require('../backend/router/authendicate');
 const userRouter = require('./router/userrouter');
 const productRouter = require('./router/product');
+const newrouter = require('./router/newrouter');
 
 
 app.use(express.json()); // ✅ To parse JSON input
@@ -32,8 +33,10 @@ app.get('/webpage',(req,res)=>{
     res.render('dashboard.jade');
 });
 
+app.use('/api/v1/new',newrouter);
 //cart api
 app.use('/api/v1/cart', cartrouter);
+
 app.use('/api/v1/dashboard', router);
 //register and login api
 app.use('/api/v1/auth', authrouter);

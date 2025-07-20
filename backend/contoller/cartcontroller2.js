@@ -1,61 +1,56 @@
 const UserCart = require("../model/userCart"); // Adjust path if needed
 const { nanoid } = require("nanoid");
+const mongoose=require('mongoose')
 
 async function postcart(req, res) {
-  const { username, useremail, userpassword } = req.body;
+  const { userId, productId } = req.body;
 
-  // Validation
-  if (!username || !useremail || !userpassword) {
+  if (!userId || !productId) {
     return res.status(400).json({
       success: false,
-      message: "username, useremail, and userpassword are required",
+      message: "Missing userId or productId"
     });
   }
 
   try {
-    // Create new user cart document
-    const {
-      username,
-      useremail,
-      userpassword,
-      productname,
-      productprice,
-      productImage,
-    } = req.body;
-
-    const newCart = new UserCart({
-      userId: nanoid(),
-      username,
-      useremail,
-      userpassword,
-      cartId: nanoid(),
-      productQuantity: 1,
-      productDetails: [
-        {
-          productId: nanoid(),
-          productname,
-          productprice,
-          productImage,
-        },
-      ],
+    const cartItem = await UserCart.findOne({
+      userId: new mongoose.Types.ObjectId(userId),
+      productId: new mongoose.Types.ObjectId(productId)
     });
 
-    // Save to MongoDB
-    await newCart.save();
+    if (cartItem) {
+      cartItem.productQuantity += 1;
+      await cartItem.save();
+      return res.json({
+        success: true,
+        message: "Product quantity updated",
+        cartItem
+      });
+    } else {
+      const newCartItem = new UserCart({
+        userId,
+        cartId: userId,
+        productId,
+        productQuantity: 1
+      });
 
-    res.status(201).json({
-      success: true,
-      message: "User cart created successfully in MongoDB",
-      data: newCart,
-    });
+      await newCartItem.save();
+      return res.json({
+        success: true,
+        message: "Product added to cart",
+        newCartItem
+      });
+    }
   } catch (err) {
+    console.error("❌ postcart error:", err);
     res.status(500).json({
       success: false,
       message: "Server error",
-      error: err.message,
+      error: err.message
     });
   }
 }
+
 
 async function getCartPage(req, res) {
   try {

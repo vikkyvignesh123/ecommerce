@@ -1,4 +1,6 @@
 const Product = require('../model/product');
+const UserCart = require('../model/userCart');
+const mongoose = require('mongoose');
 const {nanoid}=require("nanoid");
 const { findByIdAndDelete } = require('../model/userCart');
 
@@ -50,34 +52,41 @@ catch(err)
 }
 // add product
 
-const addProduct = async (req, res) => {
-    try{
-        const {productname,productprice,productImage}=req.body;
+async function addProduct(req, res) {
+    try {
+    const { userId, productId } = req.body;
 
-        const newAddProduct = await new Product({
-            productId: nanoid(),
-            productname: productname,
-            productprice: productprice,
-            productImage: productImage,
-            createdat:Date.now()
-        })
+    const userObjectId = new mongoose.Types.ObjectId(userId);
+    const productObjectId = new mongoose.Types.ObjectId(productId);
 
-       await newAddProduct.save()
-        res.json({
-            success:true,
-            status:200,
-            message:"Successfully product stored"
-        })
-}
-catch(err)
-{
-    res.json({
-        success:false,
-        status:404,
-        message:"cannot stored product "
-    })
-}
-}
+    let cartItem = await UserCart.findOne({
+      userId: userObjectId,
+      productId: productObjectId
+    });
+
+    if (cartItem) {
+      cartItem.productQuantity += 1;
+      await cartItem.save();
+      return res.json({ message: "Product quantity updated", cartItem });
+    }
+
+    const newCartItem = new UserCart({
+      userId: userObjectId,
+      cartId: userId,
+      productId: productObjectId,
+      productQuantity: 1
+    });
+
+    await newCartItem.save();
+
+    res.json({ message: "Product added to cart", newCartItem });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Error adding to cart", error: err.message });
+  }
+};
+
 // update product
 
 const updateProduct = async (req, res) => {
@@ -129,12 +138,31 @@ res.json({
 }
 
 
+const getUserCart = async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    const items = await UserCart.find({ userId: userId });
+
+    let totalItems = 0;
+    items.forEach(item => {
+      totalItems += item.productQuantity;
+    });
+
+    res.json({ totalItems, items });
+  } catch (err) {
+    res.status(500).json({ message: "Error fetching cart", error: err.message });
+  }
+};
+
+
 
 module.exports={
     getAllProducts,
     getProductById,
     addProduct,
     updateProduct,
-    deleteProduct
+    deleteProduct,
+    getUserCart
 
 }
